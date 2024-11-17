@@ -98,7 +98,7 @@ def open_database(env, with_connection=False):
 def get_mail_users(env):
 	# Returns a flat, sorted list of all user accounts.
 	c = open_database(env)
-	c.execute('SELECT email FROM users limit 10')
+	c.execute('SELECT email FROM users')
 	users = [ row[0] for row in c.fetchall() ]
 	return utils.sort_email_addresses(users, env)
 
@@ -125,7 +125,7 @@ def get_mail_users_ex(env, with_archived=False):
 	users = []
 	active_accounts = set()
 	c = open_database(env)
-	c.execute('SELECT email, privileges FROM users limit 10')
+	c.execute('SELECT email, privileges FROM users')
 	for email, privileges in c.fetchall():
 		active_accounts.add(email)
 
